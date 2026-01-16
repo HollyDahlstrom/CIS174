@@ -1,0 +1,59 @@
+﻿@* 
+    Name: Holly Dahlstrom
+    Class: DMACC CIS 174
+    Date: 1/15/2026
+    Assignment: First Responsive Web App
+    Description: View for Age Calculator form and results
+*@
+
+@model FirstResponsiveWebAppDahlstrom.Models.BirthdayModel
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Responsive Age Calculator</title>
+    <link rel="stylesheet" href="~/css/styles.css" />
+</head>
+<body>
+    <div class="container">
+        <h1>Age Calculator</h1>
+
+        <form asp-action="Index" method="post">
+            <div asp-validation-summary="All" class="validation"></div>
+
+            <label asp-for="Name">Name:</label>
+            <input asp-for="Name" />
+
+            <label asp-for="BirthYear">Birth Year:</label>
+            <input asp-for="BirthYear" />
+
+            <label asp-for="BirthMonth">Birth Month (1-12):</label>
+            <input asp-for="BirthMonth" />
+
+            <label asp-for="BirthDay">Birth Day (1-31):</label>
+            <input asp-for="BirthDay" />
+
+            <div class="buttons">
+                <button type="submit">Submit</button>
+                <a asp-action="Index" class="button-link">Clear</a>
+            </div>
+
+            <p id="result">
+                @if (ViewBag.Age != null)
+                {
+                    <text>@Model.Name, you will be @ViewBag.Age years old on December 31st.</text>
+                }
+                @if (ViewBag.AgeToday != null)
+                {
+                    <text> You are currently @ViewBag.AgeToday years old today.</text>
+                }
+            </p>
+        </form>
+    </div>
+</body>
+</html>
