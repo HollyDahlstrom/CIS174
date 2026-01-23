@@ -1,4 +1,17 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿/*
+ * ApplicationDbContext.cs
+ * EF Core Web App Lab - ContactsAppDahlstrom
+ * 
+ * Defines the Entity Framework Core database context for the application.
+ * - Manages the Contacts table in the SQL database.
+ * - Handles database connections and CRUD operations via EF Core.
+ *
+ * Author: Holly Dahlstrom
+ * Date: Jan 23, 2026
+ * Course: CIS174
+ */
+
+using Microsoft.EntityFrameworkCore;
 using ContactsAppDahlstrom.Models;
 
 namespace ContactsAppDahlstrom.Data

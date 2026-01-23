@@ -1,3 +1,18 @@
+/*
+ * Program.cs
+ * EF Core Web App Lab - ContactsAppDahlstrom
+ * 
+ * Configures and runs the ASP.NET Core MVC application.
+ * - Registers MVC services
+ * - Registers Entity Framework Core with SQL Server
+ * - Configures routing
+ * - Runs the web server
+ *
+ * Author: Holly Dahlstrom
+ * Date: Jan 23, 2026
+ * Course: CIS174
+ */
+
 using ContactsAppDahlstrom.Data;
 using Microsoft.EntityFrameworkCore;
 

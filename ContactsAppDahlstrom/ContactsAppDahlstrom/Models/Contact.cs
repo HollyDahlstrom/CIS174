@@ -1,4 +1,21 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿/*
+ * Contact.cs
+ * EF Core Web App Lab - ContactsAppDahlstrom
+ * 
+ * Defines the Contact class representing a single contact in the system.
+ * Properties:
+ * - Id: Primary key (auto-incremented)
+ * - Name: Contact's name (required, max 50 characters)
+ * - PhoneNumber: Contact's phone number (required, validated)
+ * - Address: Optional contact address (max 100 characters)
+ * - Note: Optional notes about the contact (max 200 characters)
+ *
+ * Author: Holly Dahlstrom
+ * Date: Jan 23, 2026
+ * Course: CIS174
+ */
+
+using System.ComponentModel.DataAnnotations;
 
 namespace ContactsAppDahlstrom.Models
 {
