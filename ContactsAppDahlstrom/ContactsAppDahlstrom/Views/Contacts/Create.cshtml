@@ -1,0 +1,69 @@
+﻿@model ContactsAppDahlstrom.Models.Contact
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Add Contact</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" />
+</head>
+<body class="p-4">
+    <div class="container">
+        <h2 class="mb-3">Add Contact</h2>
+
+        <form asp-action="Create" method="post">
+            @Html.AntiForgeryToken()
+
+            <div class="mb-3">
+                <label asp-for="Name" class="form-label"></label>
+                <input asp-for="Name" class="form-control" />
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+
+            <div class="mb-3">
+                <label asp-for="PhoneNumber" class="form-label"></label>
+                <input asp-for="PhoneNumber" class="form-control" placeholder="123-456-7890" maxlength="12" />
+                <span asp-validation-for="PhoneNumber" class="text-danger"></span>
+            </div>
+
+            <div class="mb-3">
+                <label asp-for="Address" class="form-label"></label>
+                <input asp-for="Address" class="form-control" />
+                <span asp-validation-for="Address" class="text-danger"></span>
+            </div>
+
+            <div class="mb-3">
+                <label asp-for="Note" class="form-label"></label>
+                <textarea asp-for="Note" class="form-control"></textarea>
+                <span asp-validation-for="Note" class="text-danger"></span>
+            </div>
+
+            <button type="submit" class="btn btn-success">Save</button>
+            <a asp-action="Index" class="btn btn-secondary ms-2">Cancel</a>
+        </form>
+    </div>
+
+    <!-- jQuery & Validation Scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.6/jquery.validate.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate-unobtrusive/3.2.13/jquery.validate.unobtrusive.min.js"></script>
+
+    <script>
+        // Phone number mask: automatically inserts dashes
+        const phoneInput = document.querySelector('input[name="PhoneNumber"]');
+        phoneInput.addEventListener('input', (e) => {
+            let x = e.target.value.replace(/\D/g, '');
+            if (x.length > 3 && x.length <= 6)
+                e.target.value = x.slice(0,3) + '-' + x.slice(3);
+            else if (x.length > 6)
+                e.target.value = x.slice(0,3) + '-' + x.slice(3,6) + '-' + x.slice(6,10);
+            else
+                e.target.value = x;
+        });
+    </script>
+</body>
+</html>

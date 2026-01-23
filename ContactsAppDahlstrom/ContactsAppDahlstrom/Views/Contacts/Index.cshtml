@@ -1,0 +1,51 @@
+﻿@model IEnumerable<ContactsAppDahlstrom.Models.Contact>
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Contact List</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" />
+</head>
+<body class="p-4">
+
+    <div class="container">
+        <h2 class="mb-3">Contact List</h2>
+
+        <a class="btn btn-primary mb-3" asp-action="Create">Add Contact</a>
+
+        <table class="table table-striped table-bordered">
+            <thead class="table-dark">
+                <tr>
+                    <th>Name</th>
+                    <th>Phone</th>
+                    <th>Address</th>
+                    <th>Note</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var contact in Model)
+                {
+                    <tr>
+                        <td>@contact.Name</td>
+                        <td>@contact.PhoneNumber</td>
+                        <td>@contact.Address</td>
+                        <td>@contact.Note</td>
+                        <td>
+                            <a class="btn btn-danger btn-sm"
+                               asp-action="Delete"
+                               asp-route-id="@contact.Id">Delete</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+
+</body>
+</html>
