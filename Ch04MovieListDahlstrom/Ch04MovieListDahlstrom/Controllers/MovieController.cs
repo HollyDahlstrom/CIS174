@@ -2,7 +2,7 @@
  * Author: Holly Dahlstrom
  * Course: CIS 174
  * Project: Ch 04 Movie List App
- * Date: January 23, 2026
+ * Date: January 23, 2026; Added to 2/11/26
  * Description: Controller for managing movies (list, add, edit, delete)
  */
 
@@ -83,6 +83,54 @@ namespace Ch04MovieListDahlstrom.Controllers
             this.context.Movies.Remove(movie);
             this.context.SaveChanges();
             return RedirectToAction("Index", "Home");
+        }
+
+        // ====== Dummy Pages for Assignment ======
+
+        // Default routing page
+        public IActionResult DefaultPage()
+        {
+            return View();
+        }
+
+        // Custom attribute routing page
+        [Route("Movie/AttributePage")]
+        public IActionResult AttributePage()
+        {
+            ViewData["Title"] = "Attribute Routing Page";
+            return View();
+        }
+
+        // Display
+        public IActionResult Display(string id)
+        {
+            int cnt = Convert.ToInt32(id);
+            return View(cnt);
+        }
+
+        // Admin area page (dummy)
+        public IActionResult Admin()
+        {
+            return View();
+        }
+
+        // Privacy
+        public IActionResult Privacy()
+        {
+            return View();
+        }
+
+        // Static Content
+        public IActionResult StaticContent(string num)
+        {
+            return Content($"Static Content: {num}");
+        }
+
+        // Index Override
+        [Route("/")]
+        public IActionResult IndexOverride()
+        {
+            return Content("Index Override!");
         }
     }
 }

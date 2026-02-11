@@ -8,8 +8,7 @@ builder.Services.AddControllersWithViews();
 
 // Add EF Core DI
 builder.Services.AddDbContext<MovieContext>(options =>
-    options.UseSqlServer(
-        builder.Configuration.GetConnectionString("MovieContext")));
+    options.UseSqlite(builder.Configuration.GetConnectionString("MovieContext")));
 
 var app = builder.Build();
 
@@ -28,6 +27,12 @@ app.UseRouting();
 
 app.UseAuthorization();
 
+// Static route
+app.MapControllerRoute(
+    name: "Static",
+    pattern: "{controller=Movie}/{action}/Page/{num}");
+
+// Default route
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Movie}/{action=Index}/{id?}");
