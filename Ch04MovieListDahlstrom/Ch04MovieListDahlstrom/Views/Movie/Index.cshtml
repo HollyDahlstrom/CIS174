@@ -2,6 +2,11 @@
 @{
     ViewBag.Title = "My Movies";
 }
+<h1 class="display-4">Welcome @ViewBag.Name</h1>
+@if (ViewBag.Name == "Student")
+{
+    <p>Hello, Student</p>
+}
 
 <h2>Movie List</h2>
 <a asp-controller="Movie" asp-action="Add">Add New Movie</a>

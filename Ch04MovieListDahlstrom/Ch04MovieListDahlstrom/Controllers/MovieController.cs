@@ -23,6 +23,12 @@ namespace Ch04MovieListDahlstrom.Controllers
 
         public IActionResult Index()
         {
+            // Set ViewBag.Name for the welcome message
+            ViewBag.Name = "Student";
+
+            //
+            ViewData["ViewDataProperty"] = "View Data Works!";
+
             var movies = context.Movies.Include(m => m.Genre).OrderBy(m => m.Name).ToList();
             return View(movies);
         }
@@ -118,6 +124,11 @@ namespace Ch04MovieListDahlstrom.Controllers
         public IActionResult Privacy()
         {
             return View();
+        }
+
+        public IActionResult OtherPrivacy()
+        {
+            return View("Privacy");
         }
 
         // Static Content
