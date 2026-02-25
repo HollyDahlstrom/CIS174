@@ -26,7 +26,6 @@ namespace Ch04MovieListDahlstrom.Controllers
             // Set ViewBag.Name for the welcome message
             ViewBag.Name = "Student";
 
-            //
             ViewData["ViewDataProperty"] = "View Data Works!";
 
             var movies = context.Movies.Include(m => m.Genre).OrderBy(m => m.Name).ToList();

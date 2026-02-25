@@ -1,0 +1,38 @@
+﻿@model Ch04MovieListDahlstrom.Models.Assignment71ViewModel
+
+<h2>Olympic Countries</h2>
+
+<div class="row mb-3">
+    <div class="col-md-3">
+        <form method="get">
+            <label>Filter by Game</label>
+            <select name="selectedGame" class="form-select" onchange="this.form.submit()">
+                <!option value="ALL" @(Model.SelectedGame == "ALL" ? "selected" : null)>ALL</!option>
+                @foreach (var game in Model.Games)
+                {
+                    <!option value="@game" @(game == Model.SelectedGame ? "selected" : null)>@game</!option>
+                }
+            </select>
+
+            <select name="selectedType" class="form-select" onchange="this.form.submit()">
+                <!option value="ALL" @(Model.SelectedType == "ALL" ? "selected" : null)>ALL</!option>
+                @foreach (var type in Model.Types)
+                {
+                    <!option value="@type" @(type == Model.SelectedType ? "selected" : null)>@type</!option>
+                }
+            </select>
+        </form>
+    </div>
+
+    <div class="col-md-9">
+        <div class="row">
+            @foreach (var country in Model.Countries)
+            {
+                <div class="col-3 text-center mb-3">
+                    <img src="@country.FlagUrl" class="img-fluid" title="@($"{country.Country} - {country.Game} - {country.Type} - {country.Sport}")" />
+                    <p>@country.Country</p>
+                </div>
+            }
+        </div>
+    </div>
+</div>
