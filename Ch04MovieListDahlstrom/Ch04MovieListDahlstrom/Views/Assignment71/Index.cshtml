@@ -2,6 +2,11 @@
 
 <h2>Olympic Countries</h2>
 
+@if (TempData["Message"] != null)
+{
+    <div class="alert alert-success">@TempData["Message"]</div>
+}
+
 <div class="row mb-3">
     <div class="col-md-3">
         <form method="get">
@@ -31,8 +36,25 @@
                 <div class="col-3 text-center mb-3">
                     <img src="@country.FlagUrl" class="img-fluid" title="@($"{country.Country} - {country.Game} - {country.Type} - {country.Sport}")" />
                     <p>@country.Country</p>
+
+                    <!-- Add to Favorites button -->
+                    <a class="btn btn-sm btn-primary mt-1"
+                       asp-controller="Favorites"
+                       asp-action="Add"
+                       asp-route-country="@country.Country"
+                       asp-route-game="@country.Game"
+                       asp-route-type="@country.Type"
+                       asp-route-flagUrl="@country.FlagUrl">
+                        Add to Favorites
+                    </a>
                 </div>
             }
+        </div>
+        <!-- Return to Home Page button -->
+        <div class="mt-3">
+            <a class="btn btn-secondary" asp-controller="Assignment71" asp-action="Index">
+                Return to Home Page
+            </a>
         </div>
     </div>
 </div>

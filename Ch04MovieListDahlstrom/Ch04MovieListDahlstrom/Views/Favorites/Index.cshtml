@@ -1,0 +1,33 @@
+﻿@model List<Ch04MovieListDahlstrom.Models.CountrySport>
+@{
+    ViewData["Title"] = "My Favorite Countries";
+}
+
+<h2>@ViewData["Title"]</h2>
+
+@if (!Model.Any())
+{
+    <p>No favorites yet!</p>
+}
+else
+{
+    <div class="row">
+        @foreach (var country in Model)
+        {
+            <div class="col-3 text-center mb-3">
+                <img src="@country.FlagUrl" class="img-fluid" title="@($"{country.Country} - {country.Game} - {country.Type}")" />
+                <p>@country.Country</p>
+            </div>
+        }
+    </div>
+}
+
+<div class="mt-3">
+    <a class="btn btn-secondary" asp-controller="Assignment71" asp-action="Index">Return to Home Page</a>
+    <a class="btn btn-danger" asp-action="Clear">Clear Favorites</a>
+</div>
+
+@if (TempData["Message"] != null)
+{
+    <div class="alert alert-success mt-2">@TempData["Message"]</div>
+}

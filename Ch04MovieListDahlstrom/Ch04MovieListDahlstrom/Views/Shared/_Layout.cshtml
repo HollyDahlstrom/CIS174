@@ -50,6 +50,15 @@
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-controller="Movie" asp-action="Privacy">Privacy</a>
                         </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-controller="Favorites" asp-action="Index">Favorites</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Session" asp-action="Index">Session</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Session" asp-action="Cookie">Cookie</a>
+                        </li>
 
                         <!-- ASSIGNMENTS DROPDOWN -->
                         <li class="nav-item dropdown">
@@ -77,6 +86,13 @@
                                        asp-action="Index"
                                        asp-route-accessLevel="5">
                                         Assignment 7.1
+                                    </a>
+                                </li>
+                                <li>
+                                    <a class="dropdown-item"
+                                       asp-controller="Assignment71"
+                                       asp-action="Index">
+                                        Assignment 8.1
                                     </a>
                                 </li>
                             </ul>
