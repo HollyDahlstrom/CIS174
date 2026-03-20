@@ -1,0 +1,33 @@
+﻿@model Ch04MovieListDahlstrom.Models.Ticket
+
+<h2>Add New Ticket</h2>
+
+<form asp-action="Add" method="post">
+    <div class="mb-3">
+        <label asp-for="Name" class="form-label">Ticket Name:</label>
+        <input asp-for="Name" class="form-control" />
+        <span asp-validation-for="Name" class="text-danger"></span>
+    </div>
+    <div class="mb-3">
+        <label asp-for="Description" class="form-label">Description:</label>
+        <input asp-for="Description" class="form-control" />
+        <span asp-validation-for="Description" class="text-danger"></span>
+    </div>
+    <div class="mb-3">
+        <label asp-for="SprintNumber" class="form-label">Sprint Number:</label>
+        <input asp-for="SprintNumber" class="form-control" />
+        <span asp-validation-for="SprintNumber" class="text-danger"></span>
+    </div>
+    <div class="mb-3">
+        <label asp-for="PointValue" class="form-label">Point Value:</label>
+        <input asp-for="PointValue" class="form-control" />
+        <span asp-validation-for="PointValue" class="text-danger"></span>
+    </div>
+    <div class="mb-3">
+        <label asp-for="StatusId" class="form-label">Status:</label>
+        <select asp-for="StatusId" class="form-select" asp-items="@(new SelectList(ViewBag.Statuses, "StatusId", "Name"))"></select>
+        <span asp-validation-for="StatusId" class="text-danger"></span>
+    </div>
+    <button type="submit" class="btn btn-primary">Add Ticket</button>
+    <a asp-action="Index" class="btn btn-secondary">Cancel</a>
+</form>

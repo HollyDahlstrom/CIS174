@@ -11,7 +11,7 @@
     <div class="col-md-3">
         <form method="get">
             <label>Filter by Game</label>
-            <select name="selectedGame" class="form-select" onchange="this.form.submit()">
+            <select asp-for="SelectedGame" class="form-select" onchange="this.form.submit()">
                 <!option value="ALL" @(Model.SelectedGame == "ALL" ? "selected" : null)>ALL</!option>
                 @foreach (var game in Model.Games)
                 {
@@ -19,7 +19,7 @@
                 }
             </select>
 
-            <select name="selectedType" class="form-select" onchange="this.form.submit()">
+            <select asp-for="SelectedType" class="form-select" onchange="this.form.submit()">
                 <!option value="ALL" @(Model.SelectedType == "ALL" ? "selected" : null)>ALL</!option>
                 @foreach (var type in Model.Types)
                 {

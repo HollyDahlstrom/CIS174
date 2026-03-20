@@ -7,9 +7,16 @@ namespace Ch04MovieListDahlstrom.Controllers
 {
     public class Assignment71Controller : Controller
     {
-        // Index displays front page w/ filters
-        public IActionResult Index(string selectedGame = "ALL", string selectedType = "ALL")
+        [Route("Assignment71/{SelectedGame?}/{SelectedType?}")]
+        public IActionResult Index(Assignment71ViewModel model)
         {
+            // Default values if nothing selected
+            if (string.IsNullOrEmpty(model.SelectedGame))
+                model.SelectedGame = "ALL";
+
+            if (string.IsNullOrEmpty(model.SelectedType))
+                model.SelectedType = "ALL";
+
             // List of countries/sports
             var countries = new List<CountrySport>
             {
@@ -39,24 +46,17 @@ namespace Ch04MovieListDahlstrom.Controllers
                 new CountrySport { Country="Portugal", Game="Youth Olympic Games", Sport="Skateboarding", Type="Outdoor", FlagUrl="/flags/port.png" }
             };
 
-            // Filters countries based on selected dropdown values
             var filtered = countries
-                .Where(c => selectedGame == "ALL" || c.Game == selectedGame)
-                .Where(c => selectedType == "ALL" || c.Type == selectedType)
+                .Where(c => model.SelectedGame == "ALL" || c.Game == model.SelectedGame)
+                .Where(c => model.SelectedType == "ALL" || c.Type == model.SelectedType)
                 .OrderBy(c => c.Country)
                 .ToList();
 
-            // Builds view model
-            var viewModel = new Assignment71ViewModel
-            {
-                Countries = filtered,
-                SelectedGame = selectedGame,
-                SelectedType = selectedType,
-                Games = countries.Select(c => c.Game).Distinct().OrderBy(g => g).ToList(),
-                Types = countries.Select(c => c.Type).Distinct().OrderBy(t => t).ToList()
-            };
+            model.Countries = filtered;
+            model.Games = countries.Select(c => c.Game).Distinct().OrderBy(g => g).ToList();
+            model.Types = countries.Select(c => c.Type).Distinct().OrderBy(t => t).ToList();
 
-            return View(viewModel);
+            return View(model);
         }
     }
 }

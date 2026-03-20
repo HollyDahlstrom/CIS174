@@ -14,6 +14,9 @@ builder.Services.AddControllersWithViews();
 builder.Services.AddDbContext<MovieContext>(options =>
     options.UseSqlite(builder.Configuration.GetConnectionString("MovieContext")));
 
+builder.Services.AddDbContext<TicketContext>(options =>
+    options.UseSqlite(builder.Configuration.GetConnectionString("TicketContext")));
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
