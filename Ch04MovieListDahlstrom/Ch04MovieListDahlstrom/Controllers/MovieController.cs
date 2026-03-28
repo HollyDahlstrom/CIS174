@@ -8,6 +8,7 @@
 
 using Ch04MovieListDahlstrom.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Microsoft.EntityFrameworkCore;
 
 namespace Ch04MovieListDahlstrom.Controllers
@@ -52,6 +53,18 @@ namespace Ch04MovieListDahlstrom.Controllers
         [HttpPost]
         public IActionResult Edit(Movie movie)
         {
+            // Custom Validation: prevent using "Holly" as a movie name
+            string key = nameof(Movie.Name);  // property to validate
+            var val = ModelState.GetValidationState(key);
+
+            if (val == ModelValidationState.Valid)
+            {
+                if (movie.Name == "Holly")
+                {
+                    ModelState.AddModelError(key, "Don't use your first name as a movie title!");
+                }
+            }
+
             if (ModelState.IsValid)
             {
                 if (movie.MovieId == 0)
