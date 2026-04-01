@@ -37,6 +37,7 @@
                     <th>Description</th>
                     <th>Points</th>
                     <th>Status</th>
+                    <th>Created</th>
                 </tr>
             </thead>
             <tbody>
@@ -47,6 +48,7 @@
                         <td>@ticket.Description</td>
                         <td>@ticket.PointValue</td>
                         <td>@ticket.Status.Name</td>
+                        <td>@ticket.CreatedDate.ToShortDateString()</td>
                     </tr>
                 }
             </tbody>

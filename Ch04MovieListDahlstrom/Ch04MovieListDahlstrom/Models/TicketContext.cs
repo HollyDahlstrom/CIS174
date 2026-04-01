@@ -20,9 +20,9 @@ namespace Ch04MovieListDahlstrom.Models
             );
 
             modelBuilder.Entity<Ticket>().HasData(
-                new Ticket { TicketId = 1, Name = "Setup Project", Description = "Create solution and project files", SprintNumber = 1, PointValue = 3, StatusId = "To Do" },
-                new Ticket { TicketId = 2, Name = "Create Models", Description = "Add Ticket model", SprintNumber = 1, PointValue = 5, StatusId = "In Progress" },
-                new Ticket { TicketId = 3, Name = "Build Views", Description = "Implement Index view for tickets", SprintNumber = 2, PointValue = 8, StatusId = "QA" }
+                new Ticket { TicketId = 1, Name = "Setup Project", Description = "Create solution and project files", SprintNumber = 1, PointValue = 3, StatusId = "To Do", CreatedDate = new DateTime(2026, 4, 1)},
+                new Ticket { TicketId = 2, Name = "Create Models", Description = "Add Ticket model", SprintNumber = 1, PointValue = 5, StatusId = "In Progress", CreatedDate = new DateTime(2026, 4, 1)},
+                new Ticket { TicketId = 3, Name = "Build Views", Description = "Implement Index view for tickets", SprintNumber = 2, PointValue = 8, StatusId = "QA", CreatedDate = new DateTime(2026, 4, 1)}
             );
         }
     }

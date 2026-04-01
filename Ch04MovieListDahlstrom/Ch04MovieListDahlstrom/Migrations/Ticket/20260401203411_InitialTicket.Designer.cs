@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Ch04MovieListDahlstrom.Migrations.Ticket
 {
     [DbContext(typeof(TicketContext))]
-    [Migration("20260320200637_InitialTicket")]
+    [Migration("20260401203411_InitialTicket")]
     partial class InitialTicket
     {
         /// <inheritdoc />
@@ -63,10 +63,12 @@ namespace Ch04MovieListDahlstrom.Migrations.Ticket
 
                     b.Property<string>("Description")
                         .IsRequired()
+                        .HasMaxLength(200)
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Name")
                         .IsRequired()
+                        .HasMaxLength(50)
                         .HasColumnType("TEXT");
 
                     b.Property<int>("PointValue")

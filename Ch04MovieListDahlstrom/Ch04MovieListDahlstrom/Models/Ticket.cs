@@ -31,5 +31,7 @@ namespace Ch04MovieListDahlstrom.Models
         public Status Status { get; set; } = null!;
 
         public bool IsComplete => StatusId == "Done";
+
+        public DateTime CreatedDate { get; set; } = DateTime.Now;
     }
 }
