@@ -1,74 +1,75 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 using Ch04MovieListDahlstrom.Models;
+using Ch04MovieListDahlstrom.Repository;
+using Microsoft.EntityFrameworkCore;
 
 namespace Ch04MovieListDahlstrom.Controllers
 {
     public class TicketController : Controller
     {
-        private readonly TicketContext _context;
+        private readonly ITicketRepository _repo;
+        private readonly TicketContext _context; 
 
-        public TicketController(TicketContext context)
+        public TicketController(ITicketRepository repo, TicketContext context)
         {
+            _repo = repo;
             _context = context;
         }
 
         // Index action with optional status filter
-        public async Task<IActionResult> Index(string statusFilter)
+        public IActionResult Index(string statusFilter)
         {
-            // Loads statuses for dropdown
-            ViewBag.Statuses = await _context.Statuses.ToListAsync();
+            ViewBag.Statuses = _context.Statuses.ToList();
 
-            // Starts query
-            IQueryable<Ticket> query = _context.Tickets.Include(t => t.Status);
+            var tickets = _repo.GetAllTickets();
 
-            // Applies status filter
+            // Apply filter
             if (!string.IsNullOrEmpty(statusFilter) && statusFilter != "all")
             {
-                query = query.Where(t => t.Status.Name == statusFilter);
+                tickets = tickets
+                    .Where(t => t.StatusId == statusFilter)
+                    .ToList();
             }
 
-            var tickets = await query.OrderBy(t => t.TicketId).ToListAsync();
             ViewBag.StatusFilter = statusFilter ?? "all";
 
             return View(tickets);
         }
 
-        // Deletes all completed tickets
+        // Delete completed
         [HttpPost]
-        public async Task<IActionResult> DeleteCompleted()
+        public IActionResult DeleteCompleted()
         {
-            var completed = await _context.Tickets
-                .Include(t => t.Status)
-                .Where(t => t.Status.Name == "Done")
-                .ToListAsync();
+            var completed = _repo.GetAllTickets()
+                .Where(t => t.StatusId == "Done")
+                .ToList();
 
-            if (completed.Any())
+            foreach (var ticket in completed)
             {
-                _context.Tickets.RemoveRange(completed);
-                await _context.SaveChangesAsync();
+                _repo.DeleteTicket(ticket);
             }
+
+            _repo.Save();
 
             return RedirectToAction("Index");
         }
 
-        // Adds ticket GET
+        // GET Add
         [HttpGet]
         public IActionResult Add()
         {
             ViewBag.Statuses = _context.Statuses.ToList();
-            var ticket = new Ticket { Status = _context.Statuses.FirstOrDefault()! };
-            return View(ticket);
+            return View(new Ticket());
         }
 
-        // Adds ticket POST
+        // POST Add
         [HttpPost]
-        public async Task<IActionResult> Add(Ticket ticket)
+        public IActionResult Add(Ticket ticket)
         {
             if (ModelState.IsValid)
             {
-                _context.Tickets.Add(ticket);
-                await _context.SaveChangesAsync();
+                _repo.InsertTicket(ticket);
+                _repo.Save();
                 return RedirectToAction("Index");
             }
 

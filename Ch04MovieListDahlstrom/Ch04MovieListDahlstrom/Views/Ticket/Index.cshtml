@@ -15,7 +15,7 @@
                     <option value="all" selected="@(ViewBag.StatusFilter == "all" ? "selected" : null)">All</option>
                     @foreach (var status in ViewBag.Statuses as List<Ch04MovieListDahlstrom.Models.Status>)
                     {
-                        <option value="@status.Name" selected="@(ViewBag.StatusFilter == status.Name ? "selected" : null)">
+                        <option value="@status.StatusId" selected="@(ViewBag.StatusFilter == status.StatusId ? "selected" : null)">
                             @status.Name
                         </option>
                     }

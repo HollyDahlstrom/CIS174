@@ -1,4 +1,5 @@
 using Ch04MovieListDahlstrom.Models;
+using Ch04MovieListDahlstrom.Repository;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -16,6 +17,8 @@ builder.Services.AddDbContext<MovieContext>(options =>
 
 builder.Services.AddDbContext<TicketContext>(options =>
     options.UseSqlite(builder.Configuration.GetConnectionString("TicketContext")));
+
+builder.Services.AddScoped<ITicketRepository, TicketRepository>();
 
 var app = builder.Build();
 
