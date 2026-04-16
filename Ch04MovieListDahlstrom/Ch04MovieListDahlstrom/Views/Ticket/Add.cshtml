@@ -28,7 +28,7 @@
         <select asp-for="StatusId" class="form-select" asp-items="@(new SelectList(ViewBag.Statuses, "StatusId", "Name"))"></select>
         <span asp-validation-for="StatusId" class="text-danger"></span>
     </div>
-    <button type="submit" class="btn btn-primary">Add Ticket</button>
+    <submit-button text="Add Ticket"></submit-button>
     <a asp-action="Index" class="btn btn-secondary">Cancel</a>
 </form>
 

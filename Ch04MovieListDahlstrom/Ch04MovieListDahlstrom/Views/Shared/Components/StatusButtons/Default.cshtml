@@ -1,0 +1,10 @@
+﻿@model List<Ch04MovieListDahlstrom.Models.Status>
+
+<div class="d-flex gap-2 mb-3">
+    @foreach (var status in Model)
+    {
+        <span class="badge bg-secondary">
+            @status.Name
+        </span>
+    }
+</div>
