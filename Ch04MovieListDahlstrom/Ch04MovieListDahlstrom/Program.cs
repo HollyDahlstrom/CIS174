@@ -1,6 +1,9 @@
 using Ch04MovieListDahlstrom.Models;
 using Ch04MovieListDahlstrom.Repository;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.UI.Services;
+using Ch04MovieListDahlstrom.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -10,6 +13,7 @@ builder.Services.AddSession();
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+builder.Services.AddRazorPages();
 
 // Add EF Core DI
 builder.Services.AddDbContext<MovieContext>(options =>
@@ -19,6 +23,17 @@ builder.Services.AddDbContext<TicketContext>(options =>
     options.UseSqlite(builder.Configuration.GetConnectionString("TicketContext")));
 
 builder.Services.AddScoped<ITicketRepository, TicketRepository>();
+
+//
+// IDENTITY
+builder.Services.AddDefaultIdentity<IdentityUser>(options =>
+{
+    options.SignIn.RequireConfirmedAccount = false;
+})
+.AddEntityFrameworkStores<TicketContext>();
+
+// Email sender
+builder.Services.AddSingleton<IEmailSender, EmailSender>();
 
 var app = builder.Build();
 
@@ -38,7 +53,10 @@ app.UseStaticFiles();
 
 app.UseRouting();
 
+app.UseAuthentication();
 app.UseAuthorization();
+
+app.MapRazorPages();
 
 // Static route
 app.MapControllerRoute(

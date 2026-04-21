@@ -1,8 +1,10 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.AspNetCore.Identity;
 
 namespace Ch04MovieListDahlstrom.Models
 {
-    public class TicketContext : DbContext
+    public class TicketContext : IdentityDbContext<IdentityUser>
     {
         public TicketContext(DbContextOptions<TicketContext> options)
             : base(options) { }
@@ -12,6 +14,8 @@ namespace Ch04MovieListDahlstrom.Models
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            base.OnModelCreating(modelBuilder);
+
             modelBuilder.Entity<Status>().HasData(
                 new Status { StatusId = "To Do", Name = "To Do" },
                 new Status { StatusId = "In Progress", Name = "In Progress" },

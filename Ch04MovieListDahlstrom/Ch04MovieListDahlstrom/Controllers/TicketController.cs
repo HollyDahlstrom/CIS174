@@ -2,9 +2,11 @@
 using Ch04MovieListDahlstrom.Models;
 using Ch04MovieListDahlstrom.Repository;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Ch04MovieListDahlstrom.Controllers
 {
+    [Authorize]
     public class TicketController : Controller
     {
         private readonly ITicketRepository _repo;
